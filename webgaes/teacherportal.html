@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Sidebar Menu</title>
+  <link href='https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css' rel='stylesheet'>
+  <!-- <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet"/>
+
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script> -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+    integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+  <link rel="stylesheet" href="../styling/adminpanel.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+<link rel="stylesheet" href="../styling/teacherportal.css">
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-app.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-database.js"></script>
+  <script src="https://www.gstatic.com/firebasejs/8.8.1/firebase-auth.js"></script>
+
+</head>
+
+<body>
+
+  <nav>
+    <div class="sidebar-top">
+      <span class="shrink-btn">
+        <i class='bx bx-chevron-left'></i>
+      </span>
+      <img src="../assets/logomain.svg" class="logo" alt="">
+      <h3 class="hide">Zab Smart School</h3>
+    </div>
+
+    <div class="search">
+      <i class='bx bx-search'></i>
+      <input type="text" class="hide" placeholder="Quick Search ...">
+    </div>
+
+    <div class="sidebar-links">
+      <ul>
+        <div class="active-tab"></div>
+        <li class="tooltip-element" data-tooltip="0">
+          <a href="#" class="active" data-active="0">
+            <div class="icon">
+              <i class='bx bx-tachometer'></i>
+              <i class='bx bxs-tachometer'></i>
+            </div>
+            <span class="link hide" id="stdload">Student list</span>
+          </a>
+        </li>
+        <li class="tooltip-element" data-tooltip="1">
+          <a href="#" data-active="1">
+            <div class="icon">
+              <i class='bx bx-folder'></i>
+              <i class='bx bxs-folder'></i>
+            </div>
+            <span class="link hide" id="teachload">Your Profile</span>
+          </a>
+        </li>
+        <li class="tooltip-element" data-tooltip="2">
+          <a href="#" data-active="2">
+            <div class="icon">
+              <i class='bx bx-message-square-detail'></i>
+              <i class='bx bxs-message-square-detail'></i>
+            </div>
+            <span class="link hide" id="study">Study Material</span>
+          </a>
+        </li>
+        <!-- <li class="tooltip-element" data-tooltip="3">
+          <a href="#" data-active="3">
+            <div class="icon">
+              <i class='bx bx-bar-chart-square'></i>
+              <i class='bx bxs-bar-chart-square'></i>
+            </div>
+            <span class="link hide">Analytics</span>
+          </a>
+        </li> -->
+        <div class="tooltip">
+          <span id="stdload">Student list</span>
+          <span id="teachload">Your Profile</span>
+          <span id="study">Study Material</span>
+          
+        </div>
+      </ul>
+
+    </div>
+
+    <div class="sidebar-footer">
+      <a href="#" class="account tooltip-element" data-tooltip="0">
+        <i class='bx bx-user'></i>
+      </a>
+      <div class="admin-user tooltip-element" data-tooltip="1">
+        <div class="admin-profile hide">
+          <img src="../assets/load1.jpg" alt="">
+          <div class="admin-info">
+            <h3>hammad</h3>
+            <h5>Admin</h5>
+          </div>
+        </div>
+        <a href="./signupform.html" class="log-out">
+          <i class='bx bx-log-out'></i>
+        </a>
+      </div>
+      <div class="tooltip">
+        <span class="show">HAMMAD</span>
+        <span>Logout</span>
+      </div>
+    </div>
+  </nav>
+
+
+  <main id="std" >
+
+
+
+    <div class="container mt-3">
+
+      <div class="input-group mb-3">
+        <input id="searchbar" type="text" class="form-control" placeholder="Recipient's username"
+          aria-label="Recipient's username" aria-describedby="basic-addon2">
+        <div class="input-group-append">
+          <select class="custom-select" id="categoryselector">
+            <option selected value="1">by name</option>
+            <option value="2">by roll no</option>
+            <option value="3">by section</option>
+            <option value="4">by gender</option>
+
+          </select>
+          <button id="searchbtn" class="btn btn-outline-secondary" type="button">search</button>
+        </div>
+      </div>
+      <table class="table table-dark text-white">
+        <thead>
+          <th>sno</th>
+          <th>name</th>
+          <th>roll</th>
+          <th>section</th>
+          <th>gender</th>
+        
+          <th>age</th>
+          
+
+        </thead>
+        <tbody id="tbody1">
+          <tr>
+
+
+          </tr>
+        </tbody>
+      </table>
+
+    </div>
+
+
+
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog"
+      aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">panel</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <label class="labs">Name:</label>
+            <input type="text" id="namemodal"> <br>
+
+            <label class="labs">roll:</label>
+            <input type="text" id="rollmodal"> <br>
+            <label class="labs">sec:</label>
+            <input type="text" id="secmodal"> <br>
+
+            <label class="labs">gender:</label>
+            <input type="text" id="gendermodal"> <br>
+            <label class="labs">Password:</label>
+            <input type="text" id="passemodal"> <br>
+            <label class="labs">Age:</label>
+            <input type="text" id="agemodal"> <br>
+
+
+
+          </div>
+          <!-- <div class="modal-footer">
+
+            <button id="addmodal" type="button" class="btn btn-primary" onclick="addrecstd()">add new record</button>
+            <button id="updatemodal" type="button" class="btn btn-success" onclick="updrecstd()">update record</button>
+            <button id="delmodal" type="button" class="btn btn-danger" onclick="delrecstd()"> delete record</button>
+
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </main>
+  <div  id="teach" style="display: none; margin-left: 350px; text-align: center;">
+  <!-- style="display: none;" -->
+  <main  >
+    <div class="container mt-1">
+        
+        <label >
+         Name
+        </label> <p id="name">abcd</p><br>
+        <label for="">
+            gender
+        </label><p id="gender">abcd</p><br>
+        <label for="">
+          experience
+        </label><p id="grade">abcd</p><br>
+        <label for="">
+            Grade
+        </label><p id="id1">abcd</p><br>
+        <label for="">
+             id 
+        </label><p id="pass">abcd</p><br>
+        <label for="">
+          password
+        </label><p id="experience">abcd</p><br>
+    </div>
+    <div>
+       
+        
+        
+        
+        
+        
+    </div>
+    
+</main>
+
+</div>
+
+
+  <main id="assignements" style="display: none;">
+    <h1>Assignements </h1>
+    <p class="text">
+    <h2>Professional ethics</h2>
+    <hr>
+    <a href="../assets/pp.zip">download all</a>
+    <hr>
+    <a href="../assets/pp/11th Week.docx" download>11th Week.docx</a>
+    <br>
+    <a href="../assets/pp/guest speacker topic b.pptx" download>guest speacker topic b.pptx</a>
+    <br>
+    <a href="../assets/pp/guest speaker topic a (1).pptx" download>guest speaker topic a (1).pptx</a>
+    <br>
+    <a href="../assets/pp/guest speaker topic a.pptx" download>guest speaker topic a.pptx</a><br>
+    <a href="../assets/pp/Prof P. 10th Week.pptx" download>Prof P. 10th Week.pptx</a><br>
+    <a href="../assets/pp/Prof P. 4th Week.docx" download>Prof P. 4th Week.docx</a><br>
+    <a href="../assets/pp/Prof P. 2nd Week.docx" download>Prof P. 2nd Week.docx</a><br>
+    <a href="../assets/pp/Prof P. 3rd Week.docx" download>Prof P. 3rd Week.docx</a><br>
+    <a href="../assets/pp/Prof P. 5th Week.docx" download>Prof P. 5th Week.docx</a><br>
+    <a href="../assets/pp/Prof P. 6th Week.docx" download>Prof P. 6th Week.docx</a><br>
+    <a href="../assets/pp/Prof P. 7th Week.docx" download>Prof P. 7th Week.docx</a><br>
+    <a href="../assets/pp/Prof P. 9th Week.pptx" download>Prof P. 9th Week.pptx</a><br>
+
+
+
+    </p>
+    <hr style="line-height: 19px; background-color: black;">
+    <p class="text">
+    <h2>Dsa theory</h2>
+    <hr>
+    <a href="../assets/dstheory.zip">download all</a>
+    <hr>
+    <a href="../assets/dstheory/DSA 1-Fall 2021.pptx" download>DSA 1-Fall 2021.pptx</a><br>
+    <a href="../assets/dstheory/DSA 2-.pptx" download>DSA 2-.pptx</a><br>
+    <a href="../assets/dstheory/lecture 10- tower of hanoi.pptx" download>lecture 10- tower of hanoi.pptx</a><br>
+    <a href="../assets/dstheory/lecture 11- queues.pptx" download>lecture 11- queues.pptx</a><br>
+    <a href="../assets/dstheory/lecture 12- intro Trees.pptx" download>lecture 12- intro Trees.pptx</a><br>
+ 
+    <a href="../assets/dstheory/lecture 13 tree traversal.pptx" download>lecture 13 tree traversal.pptx</a>
+    <br>
+    <a href="../assets/dstheory/Lecture 15 BST.pptx" download>Lecture 15 BST.pptx</a><br>
+    <a href="../assets/dstheory/lecture 3 DSA.pptx" download>lecture 3 DSA.pptx</a><br>
+    <a href="../assets/dstheory/lecture 4 DSA (updated).pptx" download>lecture 4 DSA (updated).pptx</a><br>
+    <a href="../assets/dstheory/Lecture 5 -DSA.pptx" download>Lecture 5 -DSA.pptx</a><br>
+    <a href="../assets/dstheory/Lecture 6 DLL -DSA.pptx" download>Lecture 6 DLL -DSA.pptx</a><br>
+    <a href="../assets/dstheory/Lecture 7 stacks.pptx" download>Lecture 7 stacks.pptx</a><br>
+    <a href="../assets/dstheory/lecture 9-recursion.pptx" download>lecture 9-recursion.pptx</a><br>
+    </p>
+    <hr style="line-height: 19px; background-color: black;">
+    <p class="text">
+    <h2>Discrete Maths</h2>
+    <hr>
+    <a href="../assets/dms.zip">download all</a>
+    <hr>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_Lecture 1.pptx">Lec 1</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_lecture 12b.ppt">Lec 12</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_lecture 13.ppt">Lec 13</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_lecture 13b.ppt">Lec 13b</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_Lecture 2.pptx">Lec 2</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_Lecture 3.pptx">Lec 3 </a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_Lecture 3b.pptx">Lec 3b</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_Lecture 4.ppt">Lec 4</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_lecture 7.ppt">Lec 7</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_lecture 8.ppt">Lec 8</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_Lecture 9 (1).ppt">Lec 9</a><br>
+    <a href="../assets/dms/FariaJameel_2497_17587_2_Lecture 9.ppt">Lec 9b</a><br>
+
+    </p>
+    <p class="copyright">
+      &copy; 2021 - <span>HA Solutions</span> All Rights Reserved.
+    </p>
+  </main>
+  <script src="../javascript/teacherportal.js"></script>
+
+  <!-- <script src="../javascript/admin2.js"></script> -->
+  <script src="../javascript/adminpanel.js"></script>
+
+  <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+    integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+    crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+    integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+    crossorigin="anonymous"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+    integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+    crossorigin="anonymous"></script>
+</body>
+
+</html>

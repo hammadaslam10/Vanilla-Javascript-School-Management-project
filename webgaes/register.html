@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="UTF-8">
+   
+    <link rel="stylesheet" href="../styling/register.css">
+    <link rel="stylesheet" href="../styling/index.css">
+     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   </head>
+<body>
+    <div id="loader"></div>
+     
+    <div id="myDiv">
+  <main>
+    <div class="big-wrapper light">
+      <img src="../assets/shape.png" alt="" class="shape" />
+
+      <header>
+        <div class="container">
+          <div class="logo">
+            <img src="../assets/logomain.svg" alt="Logo" />
+            <h3>Zab Smart School</h3>
+          </div>
+
+          <div class="links">
+            <ul>
+              <li><a href="../index.html" >HOME</a></li>
+              <li><a href="./gallery.html">GALLERY</a></li>
+              <li><a href="./contactus.html">Contact Us</a></li>
+              <li><a href="./signupform.html" class="btn">Sign up</a></li>
+            </ul>
+          </div>
+
+          <div class="overlay"></div>
+
+          <div class="hamburger-menu">
+            <div class="bar"></div>
+          </div>
+        </div>
+      </header>
+      <div class="container">
+        <div class="title">Registration</div>
+        <div class="content">
+          <form action="#">
+            <div class="user-details">
+            
+              <div class="input-box">
+                <span class="details">Username</span>
+                <input type="text" placeholder="Enter your username" required id="firstname">
+              </div>
+              <div class="input-box">
+                <span class="details">Email</span>
+                <input type="text" placeholder="Enter your email" required id="email">
+              </div>
+              <div class="input-box">
+                <span class="details">Phone Number</span>
+                <input type="text" placeholder="Enter your number" required id="phone">
+              </div>
+              
+              <div class="input-box">
+                <span class="details">Password</span>
+                <input type="text" placeholder="Enter your password" required id="password">
+              </div>
+              <div class="input-box">
+                <span class="details">Age</span>
+                <input type="text" placeholder="Enter your name" required id="age">
+              </div>
+              <div class="input-box">
+                <span class="details">Confirm Password</span>
+                <input type="text" placeholder="Confirm your password" required id="confirmpassword">
+              </div>
+            </div>
+            <div class="gender-details">
+              <input type="radio" name="gender" id="dot-1">
+              <input type="radio" name="gender" id="dot-2">
+              <input type="radio" name="gender" id="dot-3">
+              <span class="gender-title">Gender</span>
+              <div class="category">
+                <label for="dot-1">
+                <span class="dot one"></span>
+                <span class="gender"   id="maleradio" >Male</span>
+              </label>
+              <label for="dot-2">
+                <span class="dot two"></span>
+                <span class="gender" id="femaleradio">Female</span>
+              </label>
+              <label for="dot-3">
+                <span class="dot three"></span>
+                <span class="gender" id="undefined">Prefer not to say</span>
+                </label>
+              </div>
+            </div>
+            <div class="button">
+              <input type="submit" value="Register">
+            </div>
+          </form>
+        </div>
+      </div>
+
+      <div class="bottom-area">
+        <div class="container">
+          <button class="toggle-btn">
+            <i class="far fa-moon"></i>
+            <i class="far fa-sun"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+  </main>
+</div>
+<script src="../javascript/register.js"></script>
+<script src="https://kit.fontawesome.com/a81368914c.js"></script>
+<script src="../javascript/index.js"></script>
+</body>
+</html>
